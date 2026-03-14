@@ -155,6 +155,11 @@
     margin-top: var(--space-2xl);
 }
 
+.ign-main-feed {
+    min-width: 0;
+    /* Prevents flex/grid children with horizontal scroll from expanding the container infinitely */
+}
+
 @media (max-width: 1024px) {
     .ign-content-split {
         grid-template-columns: 1fr;
