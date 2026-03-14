@@ -77,7 +77,7 @@ export function buildGameCard(game) {
   return `
     <article class="game-card" onclick="window.location.href='game.html?id=${game.id}'">
       <div class="game-card-img-wrap">
-        <img src="${img}" alt="${title}" class="game-card-img" loading="lazy" onerror="this.src='assets/placeholder.jpg'" />
+        <img src="${img}" alt="${title}" class="game-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/placeholder.jpg';" />
         <div style="position:absolute; top:8px; right:8px; z-index:2">
           ${badgeHtml}
         </div>
@@ -125,7 +125,7 @@ export function buildArticleCard(article) {
   return `
     <article class="game-card" style="position:relative;">
       <div class="game-card-img-wrap" onclick="${linkAction}" style="cursor:pointer">
-        <img src="${imgStr}" alt="${article.title}" class="game-card-img" loading="lazy" onerror="this.src='assets/placeholder.jpg'"/>
+        <img src="${imgStr}" alt="${article.title}" class="game-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/placeholder.jpg';"/>
         <div style="position:absolute; top:8px; left:8px; z-index:2">
           <span class="${tagClass}" style="${tagStyle}">${article.category}</span>
         </div>
@@ -259,8 +259,6 @@ export function injectNavbar() {
           <button onclick="document.body.classList.toggle('light-mode'); localStorage.setItem('gv_theme', document.body.classList.contains('light-mode') ? 'light' : 'dark')" title="Toggle Theme" style="display:flex; align-items:center; background:none; border:none; color:inherit; cursor:pointer; margin-right:8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42 1.42"/></svg>
           </button>
-          <a href="login.html?return=${encodeURIComponent(window.location.pathname)}" style="color:var(--color-text-1); text-decoration:none; font-weight:500; font-size:14px; margin-right:16px;">Sign In</a>
-          <a href="register.html" style="background:var(--color-accent); color:white; padding:8px 16px; text-decoration:none; border-radius:4px; font-size:14px; font-weight:600; text-transform:uppercase;">Join Free</a>
         `;
   }
 

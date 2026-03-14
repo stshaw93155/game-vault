@@ -120,7 +120,7 @@ function renderGrid(games) {
         return `
       <article class="game-card" id="wl-card-${g.id}" style="cursor:default">
         <div class="game-card-img-wrap" onclick="window.location.href='game.html?id=${g.id}'" style="cursor:pointer">
-          <img src="${imgStr}" onerror="this.src='assets/placeholder.jpg'" />
+          <img src="${imgStr}" onerror="this.onerror=null; this.src='assets/placeholder.jpg';" />
         </div>
         <div class="game-card-content">
           <h3 class="game-card-title" style="cursor:pointer" onclick="window.location.href='game.html?id=${g.id}'">${title}</h3>

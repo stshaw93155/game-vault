@@ -133,7 +133,7 @@ function buildUpcomingCard(game, maxAdded) {
     return `
     <article class="upcoming-card">
        <div class="uc-img-wrap" onclick="window.location.href='game.html?id=${game.id}'" style="cursor:pointer">
-         <img src="${imgStr}" onerror="this.src='assets/placeholder.jpg'" />
+         <img src="${imgStr}" onerror="this.onerror=null; this.src='assets/placeholder.jpg';" />
          <div class="uc-date-badge">${dateStr}</div>
        </div>
        <div class="uc-content">

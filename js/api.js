@@ -25,8 +25,8 @@ export function cachedFetch(url) {
     const finalUrlString = fetchUrl.toString();
 
     // Cache RAWG responses in sessionStorage for 10 minutes.
-    // Use .slice(-60) from the END of the base64 so ID suffixes don't get truncated.
-    const key = "rawg_cache_" + btoa(finalUrlString).slice(-60);
+    // Use full base64 string to ensure absolute uniqueness across all parameters.
+    const key = "rawg_cache_" + btoa(finalUrlString);
     const cached = sessionStorage.getItem(key);
 
     if (cached) {
