@@ -63,6 +63,11 @@
     align-items: start;
 }
 
+.game-content-main {
+    min-width: 0;
+    /* Prevents grid 1fr blowout from horizontal scroll elements */
+}
+
 /* Gallery Strip */
 .gallery-strip {
     display: flex;
