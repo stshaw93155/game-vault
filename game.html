@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Game... - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/game.css">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <main id="game-detail-container" style="display:none">
+        <!-- Hero / Header Section -->
+        <section class="game-hero">
+            <div class="game-hero-bg" id="hero-bg"></div>
+            <div class="container game-hero-content">
+                <div class="game-hero-grid">
+                    <div class="game-info-main">
+                        <div id="hero-badges" style="display:flex; gap:8px; margin-bottom:16px; align-items:center">
+                        </div>
+                        <h1 id="hero-title"
+                            style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 8px;">Title</h1>
+                        <div class="hero-meta" id="hero-meta"
+                            style="color:var(--color-text-2); font-size:1.1rem; margin-bottom: 16px;"></div>
+                        <p id="hero-desc" class="hero-desc"></p>
+                        <button class="btn-ghost" id="desc-expand-btn"
+                            style="border:none; padding:0; text-transform:none; font-family:var(--font-body); font-size:0.9rem; text-decoration:underline; display:none;">Read
+                            More</button>
+
+                        <div class="hero-actions" style="margin-top:24px; display:flex; gap:16px;">
+                            <button id="btn-wishlist" class="btn-primary" style="padding:16px 32px">
+                                <svg width="24" height="24" id="wishlist-icon" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                <span id="wishlist-text">ADD TO WISHLIST</span>
+                            </button>
+                            <button id="btn-share" class="btn-ghost">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="18" cy="5" r="3" />
+                                    <circle cx="6" cy="12" r="3" />
+                                    <circle cx="18" cy="19" r="3" />
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                                </svg>
+                            </button>
+                            <a id="btn-website" href="#" target="_blank" class="btn-ghost" style="display:none">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="2" y1="12" x2="22" y2="12" />
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-score-cluster" style="display:flex; flex-direction:column; align-items:flex-end">
+                        <div class="score-box"
+                            style="background:var(--color-surface); padding:24px; border-radius:12px; border:1px solid var(--color-border); text-align:center; min-width:180px">
+                            <div
+                                style="font-family:var(--font-display); font-size:1.2rem; color:var(--color-text-2); text-transform:uppercase">
+                                Metascore</div>
+                            <div id="meta-score"
+                                style="font-family:var(--font-display); font-size:4rem; font-weight:700; line-height:1">
+                                -</div>
+                            <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--color-border)">
+                                <div
+                                    style="font-family:var(--font-display); font-size:1rem; color:var(--color-text-2); text-transform:uppercase">
+                                    User Rating</div>
+                                <div style="font-size:1.5rem; font-weight:bold"><span id="rawg-rating">-</span><span
+                                        style="color:var(--color-text-3); font-size:1rem">/5</span></div>
+                                <div id="rawg-count" style="font-size:0.8rem; color:var(--color-text-3)">0 RATINGS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container game-content-grid" style="margin-top:var(--space-xl); margin-bottom:var(--space-3xl)">
+            <!-- Left Column -->
+            <div class="game-content-main">
+
+                <section id="trailer-section" style="display:none; margin-bottom:var(--space-2xl)">
+                    <h2>Trailer</h2>
+                    <div class="video-wrapper" id="video-wrapper"
+                        style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:var(--radius-md); background:#000;">
+                    </div>
+                </section>
+
+                <section id="gallery-section" style="margin-bottom:var(--space-2xl)">
+                    <h2>Screenshots</h2>
+                    <div class="gallery-strip" id="gallery-strip"></div>
+                </section>
+
+                <section id="requirements-section" style="margin-bottom:var(--space-2xl); display:none">
+                    <h2>PC System Requirements</h2>
+                    <div class="req-grid" id="req-grid"
+                        style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md)">
+                        <div class="req-box"
+                            style="background:var(--color-surface-2); padding:var(--space-md); border-radius:var(--radius-sm)">
+                            <h3
+                                style="font-family:var(--font-body); font-size:1.1rem; border-bottom:1px solid var(--color-border); padding-bottom:8px">
+                                Minimum</h3>
+                            <div id="req-min"
+                                style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-2); white-space:pre-wrap; margin-top:8px">
+                            </div>
+                        </div>
+                        <div class="req-box"
+                            style="background:var(--color-surface-2); padding:var(--space-md); border-radius:var(--radius-sm)">
+                            <h3
+                                style="font-family:var(--font-body); font-size:1.1rem; border-bottom:1px solid var(--color-border); padding-bottom:8px">
+                                Recommended</h3>
+                            <div id="req-rec"
+                                style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-2); white-space:pre-wrap; margin-top:8px">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="rating-breakdown" style="margin-bottom:var(--space-2xl); display:none">
+                    <h2>Rating Breakdown</h2>
+                    <div id="breakdown-chart"
+                        style="display:flex; height:32px; border-radius:var(--radius-lg); overflow:hidden; margin-bottom:8px">
+                    </div>
+                    <div id="breakdown-labels"
+                        style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--color-text-2)">
+                    </div>
+                </section>
+
+                <section id="reviews-section" style="margin-bottom:var(--space-2xl)">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid var(--color-border); padding-bottom:10px; margin-bottom:var(--space-md)">
+                        <h2 style="margin:0">User Reviews</h2>
+                    </div>
+
+                    <div class="review-form" id="review-form-area"
+                        style="background:var(--color-surface); padding:var(--space-lg); border-radius:var(--radius-md); border:1px solid var(--color-border); margin-bottom:var(--space-xl)">
+                        <h3 style="font-family:var(--font-body); font-size:1.1rem; margin-bottom:16px">Write a Review
+                        </h3>
+                        <div style="display:flex; gap:8px; margin-bottom:16px; font-size:1.5rem; color:var(--color-text-3); cursor:pointer"
+                            id="star-picker">
+                            <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span
+                                data-val="4">★</span><span data-val="5">★</span>
+                        </div>
+                        <textarea id="review-text" rows="4"
+                            style="width:100%; background:var(--color-bg); border:1px solid var(--color-border); padding:12px; color:var(--color-text-1); border-radius:var(--radius-sm); font-family:var(--font-body); resize:vertical; margin-bottom:16px"
+                            placeholder="Share your experience..."></textarea>
+                        <button id="btn-submit-review" class="btn-primary">Submit Review</button>
+                    </div>
+
+                    <div id="reviews-list" style="display:flex; flex-direction:column; gap:var(--space-md)">
+                        <p class="text-muted">No reviews yet. Be the first!</p>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column Sidebar -->
+            <aside class="game-sidebar">
+
+                <div class="sidebar-box meta-list"
+                    style="background:var(--color-surface); border:1px solid var(--color-border); padding:var(--space-lg); border-radius:var(--radius-md); margin-bottom:var(--space-lg)">
+                    <div class="meta-item" style="margin-bottom:12px">
+                        <div style="color:var(--color-text-2); font-size:0.9rem; text-transform:uppercase">Developer
+                        </div>
+                        <div id="meta-dev" style="font-weight:600"></div>
+                    </div>
+                    <div class="meta-item" style="margin-bottom:12px">
+                        <div style="color:var(--color-text-2); font-size:0.9rem; text-transform:uppercase">Publisher
+                        </div>
+                        <div id="meta-pub" style="font-weight:600"></div>
+                    </div>
+                    <div class="meta-item" style="margin-bottom:12px">
+                        <div style="color:var(--color-text-2); font-size:0.9rem; text-transform:uppercase">Where to Buy
+                        </div>
+                        <div id="meta-stores" style="display:flex; flex-direction:column; gap:8px; margin-top:8px">
+                        </div>
+                    </div>
+                    <div class="meta-item" style="margin-bottom:12px; margin-top:16px">
+                        <div
+                            style="color:var(--color-text-2); font-size:0.9rem; text-transform:uppercase; margin-bottom:8px">
+                            Tags</div>
+                        <div id="meta-tags" style="display:flex; flex-wrap:wrap; gap:6px"></div>
+                    </div>
+                </div>
+
+                <section id="dlc-section" style="margin-bottom:var(--space-xl); display:none">
+                    <h3
+                        style="font-size:1.2rem; border-bottom:1px solid var(--color-border); padding-bottom:8px; margin-bottom:12px">
+                        DLC & Additions</h3>
+                    <div id="dlc-list" style="display:flex; flex-direction:column; gap:8px"></div>
+                </section>
+
+                <section id="series-section" style="margin-bottom:var(--space-xl); display:none">
+                    <h3
+                        style="font-size:1.2rem; border-bottom:1px solid var(--color-border); padding-bottom:8px; margin-bottom:12px">
+                        More in Series</h3>
+                    <div id="series-list" style="display:flex; flex-direction:column; gap:8px"></div>
+                </section>
+
+            </aside>
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev">&lang;</button>
+        <img id="lightbox-img" src="" alt="Screenshot" />
+        <button class="lightbox-next">&rang;</button>
+        <div class="lightbox-counter" id="lightbox-counter">1 / 1</div>
+    </div>
+
+    <script type="module" src="js/game.js"></script>
+</body>
+
+</html>

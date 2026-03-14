@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genres - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <style>
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .genre-card {
+            aspect-ratio: 16/9;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            display: block;
+        }
+
+        .genre-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform var(--transition-slow);
+        }
+
+        .genre-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            transition: background var(--transition);
+        }
+
+        .genre-card:hover .genre-card-bg {
+            transform: scale(1.1);
+        }
+
+        .genre-card:hover::after {
+            background: rgba(191, 19, 19, 0.7);
+            /* IGN red overlay on hover */
+        }
+
+        .genre-card-content {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .genre-card-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .genre-card-meta {
+            font-size: 0.9rem;
+            color: #eaeaea;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-3xl)">
+
+        <div style="text-align:center; margin-bottom:var(--space-2xl)">
+            <h1 style="font-size:3rem; margin-bottom:8px">Explore Genres</h1>
+            <p class="text-muted" style="font-size:1.1rem">Dive into thousands of games across your favorite categories.
+            </p>
+        </div>
+
+        <div class="genre-grid" id="genre-grid">
+            <div class="text-center text-muted" style="grid-column:1/-1; padding:50px">Loading genres...</div>
+        </div>
+
+    </main>
+
+    <script type="module" src="js/genres.js"></script>
+</body>
+
+</html>

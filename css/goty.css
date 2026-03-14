@@ -1,0 +1,168 @@
+/* css/goty.css */
+
+.winner-banner {
+    background: linear-gradient(45deg, var(--color-accent), #ff5555);
+    color: white;
+    padding: var(--space-xl) 0;
+    box-shadow: 0 8px 32px rgba(191, 19, 19, 0.4);
+    margin-bottom: var(--space-2xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.category-tab {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-2);
+    padding: 8px 16px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+    text-transform: uppercase;
+}
+
+.category-tab:hover {
+    background: var(--color-surface-2);
+    color: var(--color-text-1);
+}
+
+.category-tab.active {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+}
+
+.nominees-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+}
+
+.nominee-card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    position: relative;
+}
+
+.nominee-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-text-3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nominee-card.pulsing {
+    animation: pulse-border 0.5s ease-out;
+}
+
+.nominee-card.voted {
+    border-color: var(--color-accent);
+}
+
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(191, 19, 19, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(191, 19, 19, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(191, 19, 19, 0);
+    }
+}
+
+.nom-img-wrap {
+    aspect-ratio: 16/9;
+    position: relative;
+}
+
+.nom-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Chart */
+.leaderboard-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.chart-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chart-label {
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-2);
+}
+
+.chart-bar-wrap {
+    flex-grow: 1;
+    background: var(--color-surface-2);
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.chart-bar-fill {
+    height: 100%;
+    background: var(--color-accent);
+    width: 0%;
+    /* JS will animate this */
+    transition: width 0.8s cubic-bezier(0.1, 0.7, 0.1, 1);
+}
+
+.chart-value {
+    width: 50px;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .nominees-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-label {
+        width: 100px;
+    }
+}

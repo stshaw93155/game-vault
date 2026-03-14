@@ -1,0 +1,234 @@
+/* css/game.css */
+
+.game-hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--space-2xl);
+    padding-top: 120px;
+}
+
+.game-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+.game-hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-bg) 0%, rgba(15, 15, 15, 0.7) 40%, rgba(15, 15, 15, 0.3) 100%);
+}
+
+.game-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.game-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2xl);
+    align-items: flex-end;
+}
+
+.hero-desc {
+    color: var(--color-text-2);
+    line-height: 1.6;
+    max-width: 800px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.hero-desc.expanded {
+    display: block;
+}
+
+.game-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: var(--space-3xl);
+    align-items: start;
+}
+
+/* Gallery Strip */
+.gallery-strip {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-md);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+}
+
+.gallery-strip::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-strip::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+.gallery-img-wrap {
+    flex: 0 0 240px;
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color var(--transition);
+}
+
+.gallery-img-wrap:hover {
+    border-color: var(--color-accent);
+}
+
+.gallery-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition);
+}
+
+.gallery-img-wrap:hover img {
+    transform: scale(1.05);
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    user-select: none;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 4px;
+    z-index: 10000;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: var(--color-accent);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: var(--font-mono);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+/* Reviews */
+.review-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+}
+
+/* Mini Cards for Sidebar */
+.mini-card {
+    display: flex;
+    gap: 12px;
+    background: var(--color-surface-2);
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color var(--transition);
+}
+
+.mini-card:hover {
+    border-color: var(--color-accent);
+}
+
+.mini-card img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+    .game-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .game-score-cluster {
+        align-items: flex-start;
+    }
+
+    #req-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

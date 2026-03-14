@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameVault</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
+
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+  <main class="container" style="padding-top: var(--space-xl)">
+    <!-- IGN Style Hero Grid -->
+    <section class="hero-grid-container" id="hero-grid-container">
+      <div class="hero-grid-primary" id="hero-primary"></div>
+      <div class="hero-grid-secondary" id="hero-secondary"></div>
+    </section>
+
+    <!-- Split content area (70/30) -->
+    <div class="ign-content-split">
+      <div class="ign-main-feed">
+        <div class="section-heading" id="articles-heading">
+          <h2>LATEST ARTICLES & REVIEWS</h2>
+          <a href="articles.html" class="game-row-link">Read All &rarr;</a>
+        </div>
+        <div class="articles-vertical-feed" id="articles-row">
+          <!-- Articles injected as vertical feed -->
+        </div>
+
+        <div id="game-rows-container" style="margin-top:var(--space-2xl)">
+          <!-- Remaining bottom rows injected via JS -->
+        </div>
+      </div>
+
+      <div class="ign-sidebar">
+        <!-- Trending Sidebar -->
+        <div class="section-heading">
+          <h2>TRENDING NOW</h2>
+        </div>
+        <div class="trending-sidebar-list" id="sidebar-trending">
+          <!-- Small rows of trending games -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script type="module" src="js/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-split-layout">
+
+        <!-- Branding Left Panel -->
+        <div class="auth-brand-panel">
+            <div class="auth-brand-bg"></div>
+            <div class="auth-brand-content">
+                <h1 class="auth-brand-logo"><span>Game</span>Vault</h1>
+                <p class="auth-brand-tagline">Join the ultimate independent game discovery platform.</p>
+            </div>
+        </div>
+
+        <!-- Form Right Panel -->
+        <div class="auth-form-panel">
+            <div class="auth-container">
+                <h2>Create Account</h2>
+                <p class="subtitle">Enter your details to register for free.</p>
+
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" required pattern="^[a-zA-Z0-9_]{3,20}$"
+                            title="3-20 characters, letters/numbers/underscores only.">
+                        <div class="inline-error" id="err-username"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-email">Email Address</label>
+                        <input type="email" id="reg-email" required>
+                        <div class="inline-error" id="err-email"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" required minlength="6">
+                        <button type="button" class="toggle-pwd" onclick="togglePwd('reg-password', this)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                        <div class="inline-error" id="err-password"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-confirm">Confirm Password</label>
+                        <input type="password" id="reg-confirm" required minlength="6">
+                        <div class="inline-error" id="err-confirm"></div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 24px;">
+                        <label>Choose Avatar Color</label>
+                        <div class="avatar-swatch-container" id="swatch-container">
+                            <!-- Swatches injected by JS -->
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="btn-submit">Create Account</button>
+
+                    <div class="auth-links">
+                        Already have an account? <a href="login.html">Sign In &rarr;</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { registerUser, AVATAR_COLORS } from './js/user.js';
+
+        // Inject Avatar Swatches
+        const swatchContainer = document.getElementById('swatch-container');
+        let selectedColor = AVATAR_COLORS[0].hex;
+
+        AVATAR_COLORS.forEach((color, idx) => {
+            const div = document.createElement('div');
+            div.className = `avatar-swatch ${idx === 0 ? 'selected' : ''}`;
+            div.style.backgroundColor = color.hex;
+            div.title = color.name;
+            div.onclick = () => {
+                document.querySelectorAll('.avatar-swatch').forEach(el => el.classList.remove('selected'));
+                div.classList.add('selected');
+                selectedColor = color.hex;
+            };
+            swatchContainer.appendChild(div);
+        });
+
+        // Show/Hide Password functionality (global to window for inline onclick)
+        window.togglePwd = function (inputId, btnEl) {
+            const el = document.getElementById(inputId);
+            el.type = el.type === 'password' ? 'text' : 'password';
+            btnEl.innerHTML = el.type === 'password' ?
+                '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' :
+                '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+        };
+
+        // Form Handler
+        const form = document.getElementById('register-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Reset errors
+            document.querySelectorAll('.inline-error').forEach(el => { el.style.display = 'none'; el.innerText = ''; });
+            document.querySelectorAll('.error-ring').forEach(el => el.classList.remove('error-ring'));
+
+            const username = document.getElementById('reg-username').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const p1 = document.getElementById('reg-password').value;
+            const p2 = document.getElementById('reg-confirm').value;
+
+            if (p1 !== p2) {
+                const errEl = document.getElementById('err-confirm');
+                errEl.innerText = "Passwords do not match.";
+                errEl.style.display = 'block';
+                document.getElementById('reg-confirm').classList.add('error-ring');
+                return;
+            }
+
+            const res = registerUser(username, email, p1, selectedColor);
+
+            if (res.error) {
+                const errEl = document.getElementById('err-' + res.error);
+                if (errEl) {
+                    errEl.innerText = res.message;
+                    errEl.style.display = 'block';
+                    document.getElementById('reg-' + res.error).classList.add('error-ring');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

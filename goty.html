@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of the Year - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/goty.css">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div id="winner-banner" class="winner-banner" style="display:none">
+        <div class="container" style="text-align:center">
+            <div style="font-family:var(--font-display); font-size:1.5rem; text-transform:uppercase; margin-bottom:8px">
+                👑 Game of the Year Winner 👑</div>
+            <h2 id="winner-name" style="font-size:3rem; margin:0"></h2>
+        </div>
+    </div>
+
+    <main class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-3xl); max-width:1000px">
+
+        <div style="text-align:center; margin-bottom:var(--space-2xl)">
+            <h1 style="font-size:3.5rem; margin-bottom:8px; color:var(--color-accent)">GAME OF THE YEAR <span
+                    id="goty-year"></span></h1>
+            <p class="text-muted" style="font-size:1.2rem; max-width:600px; margin:0 auto">Vote for your favorite games
+                across multiple categories. Every vote counts towards the final leaderboard.</p>
+        </div>
+
+        <!-- Live Leaderboard -->
+        <section class="leaderboard-section">
+            <h3 style="display:flex; justify-content:space-between; align-items:flex-end">
+                Live Standings <span id="total-votes" style="font-size:1rem; color:var(--color-text-2)">0 Total
+                    Votes</span>
+            </h3>
+            <div id="leaderboard-chart" class="chart-container">
+                <!-- Bars injected here -->
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <div class="category-tabs" id="category-tabs">
+            <!-- Tabs injected here -->
+        </div>
+
+        <!-- Nominees Grid -->
+        <div id="nominees-grid" class="nominees-grid">
+            <div class="text-center text-muted" style="padding:40px; grid-column:1/-1">Loading nominees...</div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script type="module" src="js/goty.js"></script>
+</body>
+
+</html>

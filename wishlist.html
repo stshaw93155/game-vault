@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <style>
+        .wl-stats {
+            display: flex;
+            gap: var(--space-xl);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .wl-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1
+        }
+
+        .wl-stat-val {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            line-height: 1.1
+        }
+
+        .wl-stat-lbl {
+            font-size: 0.9rem;
+            color: var(--color-text-2);
+            text-transform: uppercase;
+            font-weight: 600
+        }
+
+        .wl-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .wl-select {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-1);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .wl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        /* Card Override for WL */
+        .wl-card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 12px;
+        }
+
+        .wl-card-remove {
+            background: none;
+            border: 1px solid var(--color-danger);
+            color: var(--color-danger);
+            cursor: pointer;
+            padding: 6px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+        }
+
+        .wl-card-remove:hover {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        #undo-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--color-surface);
+            border: 1px solid var(--color-accent);
+            padding: 12px 24px;
+            border-radius: 24px;
+            z-index: 9999;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            transition: transform var(--transition);
+        }
+
+        #undo-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #undo-btn {
+            color: var(--color-accent);
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-bottom: 1px solid
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-3xl)">
+
+        <div style="text-align:center; margin-bottom:var(--space-2xl)">
+            <h1 style="font-size:3rem; margin-bottom:8px">My Wishlist & Library</h1>
+            <p class="text-muted" style="font-size:1.1rem">Manage your personal collection. Saved securely on your
+                device.</p>
+        </div>
+
+        <div class="wl-stats">
+            <div class="wl-stat"><span class="wl-stat-val" id="stat-total">0</span><span class="wl-stat-lbl">Total
+                    Saved</span></div>
+            <div class="wl-stat"><span class="wl-stat-val" id="stat-playing">0</span><span class="wl-stat-lbl"
+                    style="color:var(--color-warning)">Playing</span></div>
+            <div class="wl-stat"><span class="wl-stat-val" id="stat-completed">0</span><span class="wl-stat-lbl"
+                    style="color:var(--color-success)">Completed</span></div>
+        </div>
+
+        <div class="wl-controls">
+            <div style="display:flex; gap:12px">
+                <select id="wl-filter" class="wl-select">
+                    <option value="all">All Statuses</option>
+                    <option value="want">Want to Play</option>
+                    <option value="playing">Playing</option>
+                    <option value="completed">Completed</option>
+                    <option value="dropped">Dropped</option>
+                </select>
+            </div>
+            <div style="display:flex; gap:12px">
+                <select id="wl-sort" class="wl-select">
+                    <option value="date-desc">Date Added (Newest)</option>
+                    <option value="rating-desc">Rating (Highest)</option>
+                    <option value="released-desc">Release Date (Newest)</option>
+                    <option value="title-asc">Title (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="wl-grid" id="wl-grid">
+            <!-- Cards Injected Here -->
+            <div class="text-center text-muted" style="grid-column:1/-1; padding:100px 0">Loading library...</div>
+        </div>
+
+        <div id="undo-toast">
+            <span>Game removed from library.</span>
+            <span id="undo-btn">Undo</span>
+        </div>
+
+    </main>
+
+    <script type="module" src="js/wishlist.js"></script>
+</body>
+
+</html>

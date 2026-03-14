@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/articles.css">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <main class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-3xl)">
+
+        <div style="text-align:center; margin-bottom:var(--space-2xl)">
+            <h1 style="font-size:3rem; margin-bottom:8px">News & Editorial</h1>
+            <p class="text-muted" style="font-size:1.1rem">The latest reviews, guides, and opinions from our team.</p>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="art-toolbar">
+            <div class="art-tabs" id="art-tabs">
+                <button class="art-tab active" data-cat="all">All</button>
+                <button class="art-tab" data-cat="news">News</button>
+                <button class="art-tab" data-cat="review">Reviews</button>
+                <button class="art-tab" data-cat="feature">Features</button>
+                <button class="art-tab" data-cat="guide">Guides</button>
+                <button class="art-tab" data-cat="opinion">Opinion</button>
+            </div>
+            <div style="flex:1; max-width:300px">
+                <input type="text" id="art-search" class="art-search" placeholder="Search articles..." />
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="art-grid" id="art-grid">
+            <div class="text-center text-muted" style="grid-column:1/-1; padding:100px 0">Loading articles...</div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="art-pagination" id="art-pagination" style="display:none">
+            <button id="page-prev" class="btn-ghost">&larr; Previous</button>
+            <span id="page-info" style="font-family:var(--font-mono); font-weight:bold">Page 1 of 1</span>
+            <button id="page-next" class="btn-ghost">Next &rarr;</button>
+        </div>
+
+    </main>
+
+    <script type="module" src="js/articles.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+/* css/variables.css */
+/* IGN-Inspired Design System for GameVault */
+
+:root {
+  /* Colors - IGN Dark Theme */
+  --color-bg:          #0F0F0F;      /* Deep black for main background */
+  --color-surface:     #1A1A1A;      /* Slightly lighter for cards/panels */
+  --color-surface-2:   #242424;      /* Hover states, inputs */
+  --color-border:      #2E2E2E;      /* Subtle borders */
+  
+  --color-text-1:      #FFFFFF;      /* Clean white for primary text */
+  --color-text-2:      #AAAAAA;      /* Light gray for secondary text */
+  --color-text-3:      #666666;      /* Muted text */
+  
+  --color-accent:      #BF1313;      /* IGN Classic Red */
+  --color-accent-hover:#990F0F;      /* Darker red for hover states */
+  
+  --color-success:     #22C55E;      /* Green for high ratings */
+  --color-warning:     #EAB308;      /* Yellow for mid ratings */
+  --color-danger:      #EF4444;      /* Red for low ratings (using a standard red, separate from accent) */
+  --color-blue:        #3B82F6;      /* Info, links */
+
+  /* Typography - Bold, condensed fonts for headings */
+  /* Importing Oswald for headings, Roboto for body */
+  --font-display:  'Oswald', 'Rajdhani', sans-serif;
+  --font-body:     'Roboto', 'Inter', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+
+  /* Spacing scale */
+  --space-xs: 4px; 
+  --space-sm: 8px; 
+  --space-md: 16px;
+  --space-lg: 24px; 
+  --space-xl: 32px; 
+  --space-2xl: 48px; 
+  --space-3xl: 64px;
+
+  /* Radii - Ign prefers sharper edges for a tech/gaming feel */
+  --radius-sm: 2px; 
+  --radius-md: 4px; 
+  --radius-lg: 8px; 
+  --radius-xl: 12px;
+
+  /* Transitions */
+  --transition: 0.2s ease;
+  --transition-slow: 0.4s ease;
+}
+
+body.light-mode {
+  --color-bg: #F5F5F5; 
+  --color-surface: #FFFFFF; 
+  --color-surface-2: #EAEAEA;
+  --color-border: #D0D0D0; 
+  --color-text-1: #111111; 
+  --color-text-2: #555555;
+  --color-text-3: #888888;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Games - GameVault</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/browse.css">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <main class="container" style="padding-top:var(--space-2xl); padding-bottom:var(--space-3xl)">
+
+        <!-- Top Bar -->
+        <div class="browse-header"
+            style="display:flex; flex-direction:column; gap:var(--space-md); margin-bottom:var(--space-xl)">
+            <h1 style="margin:0">Browse Catalogue</h1>
+
+            <div class="search-wrap" style="position:relative; max-width:600px; width:100%">
+                <input type="text" id="search-input" class="search-input" placeholder="Search games..."
+                    autocomplete="off" />
+                <button id="search-clear" class="search-clear" style="display:none">&times;</button>
+                <div id="search-autocomplete" class="search-autocomplete"></div>
+            </div>
+        </div>
+
+        <!-- Main Grid Layout -->
+        <div class="browse-layout">
+
+            <!-- Sidebar Filters -->
+            <aside class="browse-sidebar">
+                <div class="sidebar-header"
+                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px">
+                    <h3 style="margin:0">Filters</h3>
+                    <button id="btn-reset-filters" class="btn-ghost" style="padding:4px 8px; font-size:12px">Clear
+                        All</button>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Sort By</h4>
+                    <select id="filter-sort" class="filter-select">
+                        <option value="">Relevance</option>
+                        <option value="-rating">Highest Rated</option>
+                        <option value="-released">Newest</option>
+                        <option value="released">Oldest</option>
+                        <option value="-added">Most Popular</option>
+                        <option value="name">A-Z</option>
+                        <option value="-name">Z-A</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Custom Games</h4>
+                    <label class="filter-checkbox-row">
+                        <input type="checkbox" id="filter-custom" checked /> Include Community Edits
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Platforms</h4>
+                    <div id="filter-platforms" class="filter-checkbox-list">
+                        <label class="filter-checkbox-row"><input type="checkbox" value="4" /> PC</label>
+                        <label class="filter-checkbox-row"><input type="checkbox" value="187" /> PlayStation 5</label>
+                        <label class="filter-checkbox-row"><input type="checkbox" value="186" /> Xbox Series X|S</label>
+                        <label class="filter-checkbox-row"><input type="checkbox" value="7" /> Nintendo Switch</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Genres</h4>
+                    <div id="filter-genres" class="filter-checkbox-list">
+                        <!-- Injected via API -->
+                        Loading genres...
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Minimum Metacritic</h4>
+                    <div style="display:flex; align-items:center; gap:8px">
+                        <input type="range" id="filter-metacritic" min="0" max="100" value="0" style="flex:1" />
+                        <span id="meta-val" style="font-family:var(--font-mono); width:30px; text-align:right">0</span>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Results Area -->
+            <div class="browse-results">
+
+                <div class="results-toolbar"
+                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-md); padding-bottom:12px; border-bottom:1px solid var(--color-border)">
+                    <div id="results-count" class="text-muted" style="font-weight:600">Loading results...</div>
+                    <div class="view-toggles" style="display:flex; gap:8px">
+                        <button id="btn-view-grid" class="btn-view active" title="Grid View">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z" />
+                            </svg>
+                        </button>
+                        <button id="btn-view-list" class="btn-view" title="List View">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M4 6h2v2H4V6zm4 0h12v2H8V6zm-4 5h2v2H4v-2zm4 0h12v2H8v-2zm-4 5h2v2H4v-2zm4 0h12v2H8v-2z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="results-grid" class="results-grid view-grid">
+                    <!-- Game cards go here -->
+                </div>
+
+                <div id="scroll-sentinel" style="height:40px; margin-top:20px; text-align:center; padding:20px 0;">
+                    <div class="text-muted" id="loading-more-text">Loading more...</div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script type="module" src="js/browse.js"></script>
+</body>
+
+</html>
